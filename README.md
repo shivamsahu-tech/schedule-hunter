@@ -69,21 +69,6 @@ Note: `.env` files are not tracked in Git for security reasons. Make sure to:
 2. Keep a `.env.example` file in your repository as a template
 3. Document all required environment variables in your README
 
-## ⚠️ IMPORTANT: Production Environment Setup
-
-> **CRITICAL STEP**: After deploying your backend to Railway, you MUST create a `.env.production` file in your frontend directory with the production backend URL before building and deploying the frontend.
-
-1. Deploy your backend to Railway first
-2. Get your backend URL from Railway (it will look like `https://your-app-name.railway.app`)
-3. Create `frontend/.env.production`:
-```env
-VITE_API_URL=https://your-app-name.railway.app
-```
-4. Only then proceed with frontend deployment
-
-If you skip this step, your frontend will not be able to connect to your backend in production!
-
-
 ### Clone Your Fork
 ```bash
 git clone https://github.com/guvi-research/react-python-fsd-v1.git
@@ -203,6 +188,21 @@ railway init
 # 4. Deploy
 railway up
 ```
+
+## ⚠️ IMPORTANT: Production Environment Setup
+
+> **CRITICAL STEP**: After deploying your backend to Railway, you MUST create a `.env.production` file in your frontend directory with the production backend URL before building and deploying the frontend.
+
+1. Deploy your backend to Railway first
+2. Get your backend URL from Railway (it will look like `https://your-app-name.railway.app`)
+3. Create `frontend/.env.production`:
+```env
+VITE_API_URL=https://your-app-name.railway.app
+```
+4. Only then proceed with frontend deployment
+
+If you skip this step, your frontend will not be able to connect to your backend in production!
+
 
 ## 📚 Learning Resources
 
