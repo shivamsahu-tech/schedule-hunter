@@ -4,10 +4,10 @@
 #  topics details with priority list, daily study hours, exam date, subjectwise strength,
 
 
-from backend.app.services.gemini import chat
+from ..services.gemini import chat
 
 
-def getTopicsWithPriority(priorityList, examDates, dailyStudyHours, subjectwiseStrength):
+def generateScheduleFromPriorities(priorityList, examDates, dailyStudyHours, subjectwiseStrength):
     
     instructions = """
     You are a Exam Schedule expert.
