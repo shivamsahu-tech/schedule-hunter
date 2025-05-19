@@ -1,4 +1,5 @@
 import google.generativeai as genai
+import os
 
 # client = genai.Client(api_key="AIzaSyDXCuIXEaVhXm6TBBHE3b4bWrUCoaPgHJQ")
 
@@ -8,7 +9,9 @@ import google.generativeai as genai
 #     model="gemini-2.0-flash", contents=prompt
 #     )
 
-genai.configure(api_key="AIzaSyDXCuIXEaVhXm6TBBHE3b4bWrUCoaPgHJQ")
+key = os.getenv("gemini_api_key")
+
+genai.configure(api_key=key)
 
 def chat(promt): 
   model = genai.GenerativeModel("gemini-1.5-flash")
