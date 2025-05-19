@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Calendar as CalendarIcon, Clock, BookOpen, GraduationCap } from 'lucide-react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
@@ -6,47 +6,49 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import Table from './view/Table';
 import Cards from './view/Cards';
 import Calender from './view/Calender';
+import { useLocation } from 'react-router-dom';
+import { use } from 'react';
 
 // Set up the calendar localizer
 
 
 // Simplified data structure as requested
-const initialScheduleData = {
-  "2025-05-20": {
-    "Computer Science": {
-      "Database Systems": "1hr",
-      "Algorithms": "2hrs"
-    }
-  },
-  "2025-05-21": {
-    "Computer Science": {
-      "Network Security": "1.5hrs"
-    },
-    "Mathematics": {
-      "Calculus": "1hr"
-    }
-  },
-  "2025-05-22": {
-    "Computer Science": {
-      "Machine Learning": "2hrs",
-      "Web Development": "1hr"
-    }
-  },
-  "2025-05-23": {
-    "Software Engineering": {
-      "Design Patterns": "1.5hrs"
-    },
-    "Computer Science": {
-      "Mobile Development": "1hr"
-    }
-  },
-  "2025-05-24": {
-    "Computer Science": {
-      "Artificial Intelligence": "2hrs",
-      "Data Structures": "1.5hrs"
-    }
-  }
-};
+// const initialScheduleData = {
+//   "2025-05-20": {
+//     "Computer Science": {
+//       "Database Systems": "1hr",
+//       "Algorithms": "2hrs"
+//     }
+//   },
+//   "2025-05-21": {
+//     "Computer Science": {
+//       "Network Security": "1.5hrs"
+//     },
+//     "Mathematics": {
+//       "Calculus": "1hr"
+//     }
+//   },
+//   "2025-05-22": {
+//     "Computer Science": {
+//       "Machine Learning": "2hrs",
+//       "Web Development": "1hr"
+//     }
+//   },
+//   "2025-05-23": {
+//     "Software Engineering": {
+//       "Design Patterns": "1.5hrs"
+//     },
+//     "Computer Science": {
+//       "Mobile Development": "1hr"
+//     }
+//   },
+//   "2025-05-24": {
+//     "Computer Science": {
+//       "Artificial Intelligence": "2hrs",
+//       "Data Structures": "1.5hrs"
+//     }
+//   }
+// };
 
 // Convert hours string to number
 
@@ -54,12 +56,22 @@ const initialScheduleData = {
 
 
 export default function ScheduleView() {
-  const [scheduleData, setScheduleData] = useState(initialScheduleData);
-  const [activeView, setActiveView] = useState('table'); // 'table', 'cards', or 'calendar'
+  const [scheduleData, setScheduleData] = useState({});
+  const [activeView, setActiveView] = useState('table'); 
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const location = useLocation();
+  const { state } = location;
   
+  console.log("ScheduleView state:", state);
 
- 
+
+  useEffect(() => {
+    if (state && state.schedule) {
+      console.log("ScheduleView state.schedule:", JSON.stringify(state.schedule.output, null, 2));
+      setScheduleData(state.schedule.output);
+    }
+  }
+  , [state]);
 
   return (
     <div className="max-w-6xl mx-auto p-4">

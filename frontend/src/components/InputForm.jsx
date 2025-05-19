@@ -1,10 +1,36 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
+
+const dummyInput = {
+  "totalSubjects": 2,
+  "dailyStudyHours": "5",
+  "subjects": [
+    {
+      "name": "Software Engineering",
+      "examDate": "2025-06-06",
+      "syllabus": "Unit 1: Software process models, Agile development\nUnit 2: Requirements engineering, Use case modeling\nUnit 3: Design concepts, Software architecture\nUnit 4: Testing strategies, Black-box and White-box testing\nUnit 5: Software project management, Estimation, Risk analysis",
+      "unitStrengths": [80, 60, 70, 50, 40]
+    },
+    {
+      "name": "DBMS",
+      "examDate": "2025-06-09",
+      "syllabus": "Unit 1: Relational databases, ER diagrams, normalization\nUnit 2: SQL queries, joins, subqueries, indexing\nUnit 3: Transactions, concurrency control, recovery\nUnit 4: NoSQL databases, MongoDB, distributed databases",
+      "unitStrengths": [65, 70, 55, 45]
+    }
+  ]
+}
+
+
 
 export default function InputForm() {
   const [totalSubjects, setTotalSubjects] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const [subjects, setSubjects] = useState([
-    { name: '', syllabus: '', unitStrengths: [50, 50] },
+    { name: '', examDate: '', syllabus: '', unitStrengths: [50, 50] },
   ]);
 
   const [dailyStudyHours, setDailyStudyHours] = useState('');
@@ -57,15 +83,31 @@ export default function InputForm() {
 
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const userData = {
         totalSubjects,
         dailyStudyHours,
         subjects,
     }
-    console.log(" data : ", userData);
-    alert('Schedule generated! Check console for details.');
+
+    const result = await fetch('http://localhost:3001/generate-schedule', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dummyInput),
+    })
+
+    const response = await result.json();
+    console.log(response);
+    setLoading(false);
+    navigate('/schedule', {
+      state: {
+        schedule: response,
+      },
+    });
   };
 
 
@@ -110,6 +152,20 @@ export default function InputForm() {
           onChange={(e) => {
             const newSubjects = [...subjects];
             newSubjects[subjectIndex].name = e.target.value;
+            setSubjects(newSubjects);
+          }}
+          className="border border-[#94a3b8] rounded-lg flex-1 px-3 py-2 focus:outline-none focus:border-blue-400"
+        />
+      </div>
+
+      <div className="mb-5 flex items-center">
+        <label className="mr-4 font-medium">Exam Date:</label>
+        <input
+          type="date"
+          value={subject.examDate}
+          onChange={(e) => {
+            const newSubjects = [...subjects];
+            newSubjects[subjectIndex].examDate = e.target.value;
             setSubjects(newSubjects);
           }}
           className="border border-[#94a3b8] rounded-lg flex-1 px-3 py-2 focus:outline-none focus:border-blue-400"

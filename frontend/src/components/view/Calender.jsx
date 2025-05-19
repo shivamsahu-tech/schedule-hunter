@@ -36,7 +36,7 @@ function convertToCalendarEvents(scheduleData) {
       const topicsList = [];
       
       for (const [topic, duration] of Object.entries(topics)) {
-        totalHours += parseHours(duration);
+        totalHours += parseInt(duration);
         topicsList.push(`${topic} (${duration})`);
       }
       
@@ -61,9 +61,6 @@ function convertToCalendarEvents(scheduleData) {
     setSelectedEvent(event);
   }
 
-  function parseHours(durationStr) {
-  return parseFloat(durationStr.replace('hrs', '').replace('hr', ''));
-}
 
 
 

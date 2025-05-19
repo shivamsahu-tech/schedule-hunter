@@ -10,15 +10,12 @@ export default function Cards({ scheduleData }) {
     });
   }
 
-  function parseHours(durationStr) {
-    return parseFloat(durationStr.replace('hrs', '').replace('hr', ''));
-  }
-
+ 
   function getTotalHours(subjects) {
     let total = 0;
     for (const subject of Object.values(subjects)) {
       for (const duration of Object.values(subject)) {
-        total += parseHours(duration);
+        total += parseInt(duration);
       }
     }
     return total.toFixed(1);
