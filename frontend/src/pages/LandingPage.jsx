@@ -92,10 +92,10 @@ export default function LandingPage() {
                   <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">Never Worry About Exam Preparation Again</h1>
                   <p className="text-xl mb-8 text-indigo-100">Smart study schedules tailored to your exams, learning style, and availability.</p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center ">
-                    <button onClick={() => navigate('/dashboard')} className="px-8 py-3 bg-white text-indigo-900 font-semibold rounded-lg shadow-lg hover:bg-indigo-50 transition duration-300">
-                      Get Started Free
+                    <button onClick={() => navigate('/input')} className="px-8 py-3 bg-white text-indigo-900 font-semibold rounded-lg shadow-lg hover:bg-indigo-50 transition duration-300">
+                      Generate Schedule
                     </button>
-                    <button className="px-8 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition duration-300">
+                    <button onClick={() => navigate('/docs')} className="px-8 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition duration-300">
                       Learn More
                     </button>
                   </div>
@@ -103,10 +103,9 @@ export default function LandingPage() {
                 <div className="md:w-1/2 flex justify-center md:justify-end">
                   <div className="relative w-full max-w-md">
                     {/* This div would contain your hero image */}
-                    <div className="aspect-[4/3] rounded-lg bg-indigo-800 flex items-center justify-center">
+                    <div className="aspect-[4/3] rounded-lg flex items-center justify-center">
                       <div className="text-center text-indigo-200">
-                        <Calendar className="w-20 h-20 mx-auto mb-4 opacity-70" />
-                        <p className="text-sm">Hero Image Placeholder</p>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1BtLhkORsgCvCDFhKq9ZQ0ICDjaxJAntxfA&s" alt="calendar" className="w-full rounded-2xl" />
                       </div>
                     </div>
                   </div>
@@ -200,10 +199,9 @@ export default function LandingPage() {
               
               <div className="flex justify-center">
                 {/* This div would contain your illustration image */}
-                <div className="aspect-square w-full max-w-md rounded-lg bg-slate-200 flex items-center justify-center">
+                <div className="aspect-square w-full max-w-md rounded-lg bg-slate-200 h-80 flex items-center justify-center">
                   <div className="text-center text-slate-500">
-                    <Book className="w-20 h-20 mx-auto mb-4 opacity-70" />
-                    <p className="text-sm">Feature Illustration Placeholder</p>
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpnusr84qFC0bkK84R3bMD-tcVVdrNZ-NERWgp59z7bfd_Rmmt4wX_Z-BtNjggy2tdDKt6ilFC4ZwhZ_1O7PbwfoNmKB5x1CYZWP6ygLgW4YctPolvQL6CHmK5WQrC8Vprswo5h82ozOn7wsclb8Zmlb4F4UCF-OdxpWH5SFbpCrO75oSGkvS7lRA6/s1110/cal1.gif" alt="schedule" className="w-full" />
                   </div>
                 </div>
               </div>
@@ -303,7 +301,7 @@ export default function LandingPage() {
             <p className="text-xl mb-8 text-indigo-100 max-w-2xl mx-auto">
               Get your personalized study schedule today and never worry about failing an exam again.
             </p>
-            <button onClick={() => navigate('/dashboard')} className="px-8 py-4 bg-white text-indigo-900 font-semibold rounded-lg shadow-lg hover:bg-indigo-50 transition duration-300 text-lg">
+            <button onClick={() => navigate('/input')} className="px-8 py-4 bg-white text-indigo-900 font-semibold rounded-lg shadow-lg hover:bg-indigo-50 transition duration-300 text-lg">
               Generate My Free Schedule
             </button>
           </div>
