@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Home from '../pages/Home';
+// import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import Layout from '../components/Layout';
 import InputPage from '../pages/InputPage';
@@ -14,7 +14,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home />,
+        element: <LandingPage />,
       },
       {
         path: '*',
@@ -33,9 +33,5 @@ export const router = createBrowserRouter([
   {
     path: '/schedule',
     element: <Schedule />
-  },
-  {
-    path: '/home',
-    element: <LandingPage />
   },
 ]); 
