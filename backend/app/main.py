@@ -7,6 +7,7 @@ from .middleware.logging import LoggingMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 import os
 from dotenv import load_dotenv
+from typing import Optional
 
 
 
@@ -52,14 +53,14 @@ class Subject(BaseModel):
     examDate: str
     syllabus: str
     unitStrengths: List[int]
-    subjectStrength: int
-    otherDetails: str
+    subjectStrength: Optional[str]
+    otherDetails: Optional[str]
 
 class ScheduleInput(BaseModel):
     totalSubjects: int
     dailyStudyHours: str
     subjects: List[Subject]
-    examPattern: str
+    examPattern: Optional[str]
 
 
 
