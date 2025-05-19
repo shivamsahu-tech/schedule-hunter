@@ -3,6 +3,9 @@ import Home from '../pages/Home';
 import NotFound from '../pages/NotFound';
 import Layout from '../components/Layout';
 import InputPage from '../pages/InputPage';
+import Dashboard from '../pages/Dashboard';
+import Schedule from '../pages/Schedule';
+import LandingPage from '../pages/LandingPage';
 
 export const router = createBrowserRouter([
   {
@@ -22,5 +25,17 @@ export const router = createBrowserRouter([
   {
     path: '/input',
     element: <InputPage />
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />
+  },
+  {
+    path: '/schedule',
+    element: <Schedule />
+  },
+  {
+    path: '/home',
+    element: <LandingPage />
   },
 ]); 
