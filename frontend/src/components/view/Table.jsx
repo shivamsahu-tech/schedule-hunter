@@ -22,7 +22,6 @@ export default function Table({ scheduleData }) {
     return total.toFixed(1);
   }
 
-  // Function to get alternating row colors
   function getRowColor(index) {
     return index % 2 === 0 ? 'bg-white' : 'bg-gray-50';
   }

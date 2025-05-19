@@ -10,31 +10,65 @@ def generateSchedule(priorityList, examDates, dailyStudyHours, subjectwiseStreng
         "2025-05-20": {
             "DBMS": {
                 "SQL Joins": 2,
-                "ER diagrams": 1.5
+                "ER diagrams": 1
+            },
+            Math1: {
+                "Calculus": 2,
             }
         },
         "2025-05-21": {
             "Software Engineering": {
-                "UML diagrams": 3
+                "SDLC": 2.5,
+                "Agile methodology": 2
+            },
+            "Math1": {
+                "calculus(revision)": 0.5
             }
+        },
+        "2025-05-22": {
+            "Software Engineering": {
+                "SRS": 2,
+                "SDLC(PYQ): 0.5
+            },
+            "Math1": {
+                "Matrix Inversion(Practice)": 0.5
+            },
+            "DBMS": {
+                "Transactions": 2,
+            },
         }
     }
-    Notes:
-    The time should be given in the following way:
-    1. Schedule times for each topics according to its priority.
-    2. Schedule more times for the topics that are weak for student (subjectwise strength), so those topic should be given more time, but important topics should be high time.
-    4. Try to focus on the topics that are most probable to be asked in the exam, using the priority list.
-    5. Schdule the topics also between the exam dates, so that student can revise the topics before the exam.
-    6. If there are much time between the exam dates, and student is strong in that subject, then schdule some other subject topics in that time, for the futher exams.
-    Note Important: don't write json tag in the output, just return the string output in JSON format only, no extra text or explanation, so it can converted using json.loads() in python.
+    Notes: Allocate daily study hours as per user demand (total allocate hours daily as user says their daily study hours).
+    ***. Schedule topics between the exam dates, so that student can revise the topics before the exam.   
+    1. Strictly follow the exam dates and allocate topics accordingly.
+    2. Prioritize the topics based on the priority list provided, maybe you can avoid some low-priority topics if time is short.
+    3. Ensure that the schedule is balanced and covers all subjects.
+    4. You can allocate any number of subjects in a day, but also make sure to not overload the student.
+    5. Don't miss any date before exam and at the exam date revise on that subject.
+    6. if there is much time left for exam and the student is strong in that subject, then you can allocate time for further subjects.
+
+    Best Researches: 
+    Allocate more time to topics that are both important (exam weight) and difficult (user weakness).
+            Use 80/20 rule: 80% time to weak/important topics, 20% to revision of strong ones.
+            Prioritize foundational topics first, then medium, then hard ones.
+            Schedule topic reviews using spaced intervals: 1, 3, 7, and 14 days after first study.
+            Place weak/difficult topics during peak hours (morning); easier ones in low-energy times.
+            Insert light review sessions in the 1–3 days before each exam.
+            If there’s a large gap between exams, use it to study for later subjects.
+            Group related topics within 2 days of each other (e.g., DSA concepts).
+            Encourage mock tests for specific topics weekly, and twice a week in the final two weeks.
+            Use adaptive review: schedule based on user performance (low → frequent, high → sparse).
+            Try to focus on the topics that are most probable to be asked in the exam, using the priority list
+            Schdule the topics also between the exam dates, so that student can revise the topics before the exam.
+****IMP*****: return a string object that can be converted to JSON using json.loads() in python. 
     """
 
     prompt = f"""
+    Instructions: {instructions}
     Priority List: {json.dumps(priorityList)}
     Exam Dates: {json.dumps(examDates)}
     Daily Study Hours: {dailyStudyHours}
     Subjectwise Strength: {json.dumps(subjectwiseStrength)}
-    Instructions: {instructions}
     """
 
     chat_response = chat(prompt)

@@ -52,11 +52,14 @@ class Subject(BaseModel):
     examDate: str
     syllabus: str
     unitStrengths: List[int]
+    subjectStrength: int
+    otherDetails: str
 
 class ScheduleInput(BaseModel):
     totalSubjects: int
     dailyStudyHours: str
     subjects: List[Subject]
+    examPattern: str
 
 
 
@@ -72,14 +75,18 @@ async def generate_schedule(data: ScheduleInput):
     for subject in data.subjects:
         subject_name = subject.name
         syllabus = subject.syllabus
-        strengths = subject.unitStrengths
-        exam_date = subject.examDate
+        unitwiseStrength = subject.unitStrengths
+        subject_strength = subject.subjectStrength
+        other_details = subject.otherDetails
+        exam_pattern = data.examPattern
 
-        # Step 1: Generate topic priorities
         topic_priorities = getTopicsWithPriority(
             subject_name,
             syllabus,
-            strengths
+            unitwiseStrength,
+            subject_strength,
+            other_details,
+            exam_pattern
         )
 
         all_priorities.append({
@@ -87,12 +94,9 @@ async def generate_schedule(data: ScheduleInput):
             "priorities": topic_priorities
         })
 
-        # Step 2: Store exam dates
-        exam_dates[subject_name] = exam_date
+        exam_dates[subject_name] = subject.examDate
 
-        # Optional: Store average subject strength
-        avg_strength = sum(strengths) / len(strengths)
-        subjectwise_strength[subject_name] = avg_strength
+        subjectwise_strength[subject_name] = subject_strength
 
     # Step 3: Generate final schedule
     schedule = generateSchedule(

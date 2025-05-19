@@ -21,14 +21,14 @@ export default function Cards({ scheduleData }) {
     return total.toFixed(1);
   }
 
-  // Simple accent colors for subjects
+ 
   const accentColors = [
-    '#3B82F6', // blue
-    '#10B981', // emerald
-    '#F59E0B', // amber
-    '#8B5CF6', // violet
-    '#EC4899', // pink
-    '#06B6D4', // cyan
+    '#3B82F6', 
+    '#10B981', 
+    '#F59E0B', 
+    '#8B5CF6', 
+    '#EC4899', 
+    '#06B6D4', 
   ];
 
   function getSubjectColor(index) {

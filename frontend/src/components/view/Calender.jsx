@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -6,32 +7,27 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 
 const localizer = momentLocalizer(moment);
 
-// Convert our data format to events for calendar
 function convertToCalendarEvents(scheduleData) {
   const events = [];
-  // Map to track colors for subjects
   const subjectColors = {};
   let colorIndex = 0;
   const colors = [
-    '#4299e1', // blue
-    '#48bb78', // green
-    '#ed8936', // orange
-    '#9f7aea', // purple
-    '#f56565', // red
-    '#38b2ac', // teal
-    '#ecc94b'  // yellow
+    '#4299e1', 
+    '#48bb78', 
+    '#ed8936', 
+    '#9f7aea', 
+    '#f56565', 
+    '#38b2ac',
+    '#ecc94b'  
   ];
   
   for (const [dateStr, subjects] of Object.entries(scheduleData)) {
-    // Group by subject for this date
     for (const [subject, topics] of Object.entries(subjects)) {
-      // Assign color to subject if not already assigned
       if (!subjectColors[subject]) {
         subjectColors[subject] = colors[colorIndex % colors.length];
         colorIndex++;
       }
       
-      // Calculate total hours for this subject on this day
       let totalHours = 0;
       const topicsList = [];
       
@@ -40,7 +36,6 @@ function convertToCalendarEvents(scheduleData) {
         topicsList.push(`${topic} (${duration})`);
       }
       
-      // Create one all-day event per subject
       events.push({
         title: `${subject}: ${totalHours}hrs`,
         start: new Date(dateStr),
@@ -65,7 +60,7 @@ function convertToCalendarEvents(scheduleData) {
 
 
 export default function Calender({ scheduleData }) {
-
+const [selectedEvent, setSelectedEvent] = useState(null);
 
 
       const calendarEvents = convertToCalendarEvents(scheduleData);
@@ -85,6 +80,28 @@ export default function Calender({ scheduleData }) {
 
 
     return (
+
+
+      <>
+      
+       {selectedEvent && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md">
+            <h3 className="text-lg font-bold mb-2">{selectedEvent.title}</h3>
+            <p className="mb-4">Subject: {selectedEvent.subject}</p>
+            
+            <button 
+              onClick={() => setSelectedEvent(null)}
+              className="px-4 py-2 bg-blue-500 text-white rounded"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+      
+      
+     
         
 
 
@@ -125,6 +142,8 @@ export default function Calender({ scheduleData }) {
                     onSelectEvent={handleSelectEvent}
                   />
                 </div>
+
+                 </>
 
     );
     }
