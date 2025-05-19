@@ -99,7 +99,7 @@ export default function InputForm() {
 
     console.log("userInput: ", JSON.stringify(userData));
 
-    const result = await fetch('https://schedule-hunter.onrender.com/generate-schedule', {
+    const result = await fetch(process.env.backend_url+"/generate-schedule" || 'https://schedule-hunter.onrender.com/generate-schedule', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -110,11 +110,12 @@ export default function InputForm() {
     const response = await result.json();
     console.log(response);
     setLoading(false);
+    
     const allSchedules = JSON.parse(localStorage.getItem('schedules') || '[]');
     allSchedules.unshift({
       scheduleName: 'Schedule ' + (allSchedules.length + 1),
       schedule: response,
-      date: new Date()
+      date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
     });
     localStorage.setItem('schedules', JSON.stringify(allSchedules));
     navigate('/schedule', {

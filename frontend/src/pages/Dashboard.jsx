@@ -1,31 +1,37 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
-
-
-const initialSchedules = [
-  {
-    id: "1",
-    name: "Schedule 1",
-    timestamp: "2025-05-18 10:00 AM",
-    fileUrl: "/files/schedule1.pdf",
-  },
-  {
-    id: "2",
-    name: "Schedule 2",
-    timestamp: "2025-05-19 2:30 PM",
-    fileUrl: "/files/schedule2.pdf",
-  },
-];
+import { useNavigate } from "react-router-dom";
+import { Trash2, Calendar } from "lucide-react";
 
 export default function Dashboard() {
-  const [plans, setPlans] = useState(initialSchedules);
+  const navigate = useNavigate();
+  const [allSchedules, setAllSchedules] = useState(() => {
+  try {
+    return JSON.parse(localStorage.getItem("schedules")) || [];
+  } catch (e) {
+    return [];
+  }
+});
 
-  const deleteSchedule = (id) => {
-    setPlans((prev) => prev.filter((s) => s.id !== id));
-  };
 
-  const openSchedule = (fileUrl) => {
-    window.open(fileUrl, "_blank");
+
+  const deleteSchedule = (index) => {
+    const allSchedules = JSON.parse(localStorage.getItem('schedules') || '[]');
+    allSchedules.splice(index, 1);
+    localStorage.setItem('schedules', JSON.stringify(allSchedules));
+    setAllSchedules(allSchedules);
+  }
+
+
+
+  const openSchedule = (index) => {
+    const allSchedules = JSON.parse(localStorage.getItem('schedules') || '[]');
+    localStorage.setItem('schedules', JSON.stringify(allSchedules));
+    navigate('/schedule', {
+      state: {
+        schedule: allSchedules[index].schedule
+      },
+    });
   };
 
   return (
@@ -35,26 +41,32 @@ export default function Dashboard() {
 
    
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-8 text-left w-full  ">Your Past Schedules</h2>
+      <h2 className="text-2xl font-bold mb-8 text-left w-full "><span className=" border-b-2 border-black   pr-2" >Your Past Schedules</span></h2>
 
-      {plans.map((item) => (
+      {allSchedules ? allSchedules.map((obj, index) => (
         <div
-
-          key={item.id}
-          onClick={() => openSchedule(item.fileUrl)}
-          className="flex items-center justify-between p-4 mb-2 bg-white shadow rounded-xl hover:bg-gray-50 transition"
+          key={index}
+          onClick={() => openSchedule(index)}
+          className="flex items-center justify-between p-4 mb-2 bg-white shadow rounded-xl hover:bg-gray-50 transition hover:cursor-pointer"
         >
- 
-        <div className="font-semibold">{item.name}</div>
-        <div className="text-sm text-gray-500">{item.timestamp}</div>
+          <div className="font-semibold">{obj.scheduleName  }</div>
+          <div className="text-sm text-gray-500">{obj.date}</div>
           <button
-            onClick={() => deleteSchedule(item.id)}
+            onClick={(e) => {
+              e.stopPropagation(); // prevent triggering openSchedule when clicking delete
+              deleteSchedule(index);
+            }}
             className="text-red-500 hover:text-red-700"
           >
-            delete
+            <Trash2 className="w-5 h-5" />
           </button>
         </div>
-      ))}
+      )) : (
+        <button className=" mx-auto bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200 font-medium flex items-center justify-center">
+          <Calendar className="mr-2 h-5 w-5" />
+          Create your first schedule
+        </button>
+      )}
     </div>
 
        </div>
