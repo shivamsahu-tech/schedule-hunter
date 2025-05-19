@@ -4,7 +4,7 @@
 #  subjects details with unitwise syllabus, unitwise strength, 
 
 
-from backend.app.services.gemini import chat
+from ..services.gemini import chat
 
 
 def getTopicsWithPriority(subjectName, syllabus, unitwiseStrength, examPattern=""):
