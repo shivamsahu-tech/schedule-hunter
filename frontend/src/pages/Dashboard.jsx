@@ -3,11 +3,212 @@ import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import { Trash2, Calendar } from "lucide-react";
 
+const dummyData = [
+  {
+    scheduleName: "Demo Schedule ",
+    date: "2023-10-01",
+    schedule:  {
+    "2025-05-20": {
+      "Software Engineering": {
+        "Agile development": 1.5,
+        "Software process models": 1
+      },
+      "DBMS": {
+        "ER diagrams": 1,
+        "Relational databases": 1
+      }
+    },
+    "2025-05-21": {
+      "Software Engineering": {
+        "Requirements engineering": 1.5,
+        "Use case modeling": 1
+      },
+      "DBMS": {
+        "SQL queries": 1.5,
+        "Joins": 1
+      }
+    },
+    "2025-05-22": {
+      "Software Engineering": {
+        "Software architecture": 1.5,
+        "Design concepts": 1
+      },
+      "Operating Systems": {
+        "Introduction to OS": 1,
+        "System calls": 0.5,
+        "Process management": 1
+      }
+    },
+    "2025-05-23": {
+      "Software Engineering": {
+        "Black-box and White-box testing": 1.5,
+        "Testing strategies": 1
+      },
+      "Operating Systems": {
+        "CPU scheduling algorithms": 1.5,
+        "Multithreading": 1
+      }
+    },
+    "2025-05-24": {
+      "Software Engineering": {
+        "Software project management": 1.5,
+        "Estimation": 1
+      },
+      "DBMS": {
+        "Transactions": 1.5,
+        "Concurrency control": 1
+      }
+    },
+    "2025-05-25": {
+      "Operating Systems": {
+        "Memory management": 1.5,
+        "Paging": 1
+      },
+      "DBMS": {
+        "NoSQL databases": 1.5,
+        "MongoDB": 1
+      }
+    },
+    "2025-05-26": {
+      "Operating Systems": {
+        "Segmentation": 1.5,
+        "File systems": 1
+      },
+      "DBMS": {
+        "Distributed databases": 1,
+        "Indexing": 0.5
+      },
+      "Software Engineering": {
+        "Risk analysis": 0.5
+      }
+    },
+    "2025-05-27": {
+      "Software Engineering": {
+        "Agile development": 0.5,
+        "Software process models": 0.5
+      },
+      "Operating Systems": {
+        "Disk scheduling": 1,
+        "I/O systems": 0.5
+      },
+      "DBMS": {
+        "SQL queries": 0.5
+      }
+    },
+    "2025-05-28": {
+      "Software Engineering": {
+        "Requirements engineering": 0.5,
+        "Use case modeling": 0.5
+      },
+      "DBMS": {
+        "ER diagrams": 0.5
+      },
+      "Operating Systems": {
+        "Process management": 0.5
+      }
+    },
+    "2025-05-29": {
+      "Software Engineering": {
+        "Software architecture": 0.5,
+        "Design concepts": 0.5
+      },
+      "DBMS": {
+        "Transactions": 0.5
+      },
+      "Operating Systems": {
+        "CPU scheduling algorithms": 0.5
+      }
+    },
+    "2025-05-30": {
+      "Software Engineering": {
+        "Black-box and White-box testing": 0.5,
+        "Testing strategies": 0.5
+      },
+      "DBMS": {
+        "NoSQL databases": 0.5
+      },
+      "Operating Systems": {
+        "Memory management": 0.5
+      }
+    },
+    "2025-05-31": {
+      "Software Engineering": {
+        "Software project management": 0.5,
+        "Estimation": 0.5
+      },
+      "DBMS": {
+        "Normalization": 0.5
+      },
+      "Operating Systems": {
+        "File systems": 0.5
+      }
+    },
+    "2025-06-05": {
+      "Software Engineering": {
+        "Revision": 5
+      }
+    },
+    "2025-06-06": {
+      "Software Engineering": {
+        "Revision": 5
+      }
+    },
+    "2025-06-07": {
+      "DBMS": {
+        "Revision": 2
+      },
+      "Operating Systems": {
+        "Revision": 3
+      }
+    },
+    "2025-06-08": {
+      "DBMS": {
+        "Revision": 3
+      },
+      "Operating Systems": {
+        "Revision": 2
+      }
+    },
+    "2025-06-09": {
+      "DBMS": {
+        "Revision": 5
+      }
+    },
+    "2025-06-10": {
+      "Operating Systems": {
+        "Revision": 3
+      },
+      "Software Engineering": {
+        "Revision": 2
+      }
+    },
+    "2025-06-11": {
+      "Operating Systems": {
+        "Revision": 2
+      },
+      "Software Engineering": {
+        "Revision": 3
+      }
+    },
+    "2025-06-12": {
+      "Operating Systems": {
+        "Revision": 5
+      }
+    },
+    "2025-06-13": {
+      "Operating Systems": {
+        "Revision": 5
+      }
+    }
+  }
+  }
+];
+
 export default function Dashboard() {
   const navigate = useNavigate();
   const [allSchedules, setAllSchedules] = useState(() => {
   try {
-    return JSON.parse(localStorage.getItem("schedules")) || [];
+    return dummyData;
   } catch (e) {
     return [];
   }
@@ -25,8 +226,6 @@ export default function Dashboard() {
 
 
   const openSchedule = (index) => {
-    const allSchedules = JSON.parse(localStorage.getItem('schedules') || '[]');
-    localStorage.setItem('schedules', JSON.stringify(allSchedules));
     navigate('/schedule', {
       state: {
         schedule: allSchedules[index].schedule

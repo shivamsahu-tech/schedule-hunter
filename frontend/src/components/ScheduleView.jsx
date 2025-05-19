@@ -28,8 +28,8 @@ export default function ScheduleView() {
 
   useEffect(() => {
     if (state && state.schedule) {
-      console.log("ScheduleView state.schedule:", JSON.stringify(state.schedule.output, null, 2));
-      setScheduleData(state.schedule.output);
+      console.log("ScheduleView state.schedule:", JSON.stringify(state.schedule, null, 2));
+      setScheduleData(state.schedule);
     }
   }
   , [state]);
