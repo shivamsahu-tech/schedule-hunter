@@ -99,16 +99,16 @@ export default function InputForm() {
 
     console.log("userInput: ", JSON.stringify(userData));
 
-    const result = await fetch(process.env.backend_url+"/generate-schedule" || 'https://schedule-hunter.onrender.com/generate-schedule', {
+    const result = await fetch( 'https://schedule-hunter.onrender.com/generate-schedule', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(dummyInput),
+      body: JSON.stringify(userData),
     })
 
     const response = await result.json();
-    console.log(response);
+    console.log("response: ", response);  
     setLoading(false);
 
     const allSchedules = JSON.parse(localStorage.getItem('schedules') || '[]');
@@ -120,7 +120,7 @@ export default function InputForm() {
     localStorage.setItem('schedules', JSON.stringify(allSchedules));
     navigate('/schedule', {
       state: {
-        schedule: response,
+        schedule: response.output,
       },
     });
   }
@@ -285,8 +285,8 @@ export default function InputForm() {
                 type="range"
                 min="0"
                 max="100"
-                value={subject.subjectStrength}
-                onChange={(e) => handleSubjectStrengthChange(subjectIndex, parseInt(e.target.value))}
+                value={subject.subjectStrength || 0}
+                onChange={(e) => handleSubjectStrengthChange(subjectIndex, e.target.value)}
                 className="w-[200px] h-2 bg-[#cbd5e1] rounded-lg appearance-none cursor-pointer accent-[#2563eb]"
               />
             </div>

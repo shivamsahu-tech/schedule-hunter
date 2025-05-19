@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import { useNavigate } from "react-router-dom";
 import { Trash2, Calendar } from "lucide-react";
@@ -205,10 +205,19 @@ const dummyData = [
 ];
 
 export default function Dashboard() {
+
+  useEffect(() => {
+    const allSchedules = JSON.parse(localStorage.getItem('schedules') || '[]');
+    if (allSchedules.length === 0) {
+      localStorage.setItem('schedules', JSON.stringify(dummyData));
+    }
+  }, []);
+  
+
   const navigate = useNavigate();
   const [allSchedules, setAllSchedules] = useState(() => {
   try {
-    return dummyData;
+    return JSON.parse(localStorage.getItem('schedules') || dummyData);
   } catch (e) {
     return [];
   }

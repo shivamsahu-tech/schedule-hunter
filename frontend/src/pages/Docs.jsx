@@ -1,7 +1,9 @@
 import React from 'react';
-import { Calendar, BookOpen, Clock, BarChart2, Award, ListChecks, Brain, CheckCircle, LightbulbIcon, Target, AlarmClock, BookMarked, GraduationCap, BarChart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Calendar, BarChart2, Award, ListChecks, Brain, CheckCircle, LightbulbIcon, Target, AlarmClock, BookMarked, GraduationCap, BarChart } from 'lucide-react';
 
 export default function Docs() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4">
       <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden">
@@ -9,7 +11,7 @@ export default function Docs() {
           <div className="flex items-center justify-between">
             <h1 className="text-white text-2xl font-bold flex items-center">
               <Calendar className="mr-2 h-6 w-6" /> 
-              ExamPrep Scheduler
+              Schedule Hunter
             </h1>
             <span className="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full">
               Research-Backed
@@ -220,7 +222,7 @@ export default function Docs() {
           </div>
           
           <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-4 mt-8">
-            <button className=" w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200 font-medium flex items-center justify-center">
+            <button onClick={() => navigate("/input")} className=" w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200 font-medium flex items-center justify-center">
               <Calendar className="mr-2 h-5 w-5" />
               Create My Schedule Now
             </button>

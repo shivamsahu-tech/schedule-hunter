@@ -23,7 +23,7 @@ export default function ScheduleView() {
 
 
   
-  console.log("ScheduleView state:", state);
+  console.log("ScheduleView state:", JSON.stringify(state, null, 2));
 
 
   useEffect(() => {

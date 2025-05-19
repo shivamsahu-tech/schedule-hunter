@@ -90,7 +90,7 @@ export default function LandingPage() {
               <div className="flex flex-col md:flex-row items-center">
                 <div className="md:w-1/2 mb-12 md:mb-0">
                   <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">Never Worry About Exam Preparation Again</h1>
-                  <p className="text-xl mb-8 text-indigo-100">Smart study schedules tailored to your exams, learning style, and availability.</p>
+                  <p className="text-xl mb-8 text-indigo-100">smart & personalized study schedules tailored to your exams, learning style, and availability.</p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center ">
                     <button onClick={() => navigate('/input')} className="px-8 py-3 bg-white text-indigo-900 font-semibold rounded-lg shadow-lg hover:bg-indigo-50 transition duration-300">
                       Generate Schedule
@@ -115,11 +115,48 @@ export default function LandingPage() {
           </div>
         </header>
 
+      {/* 8 Core Rules */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              The Science Behind Our System
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              8 Core Rules for Effective Exam Topic Scheduling
+            </p>
+          </div>
+  
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 w-full">
+            {rules.map((rule, index) => (
+              <div
+                key={index}
+                className="bg-slate-50 w-[90%] h-[28rem] flex justify-center items-center flex-col border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+              >
+                <img
+                  src={rule.image}
+                  alt={rule.title}
+                  className="h-56 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    {rule.title}
+                  </h3>
+                  <p className="text-gray-700 mb-3">{rule.description}</p>
+                  <p className="text-sm text-gray-500 italic">
+                    Research: {rule.research}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
         {/* Value Proposition */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-6 max-w-6xl">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Why Our Schedule Generator Works</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">How our Schedule Generator Works</h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
                 We don't just create schedules. We create strategic learning paths designed for maximum retention and exam success.
               </p>
@@ -209,90 +246,8 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* 8 Core Rules */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-6">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                The Science Behind Our System
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                8 Core Rules for Effective Exam Topic Scheduling
-              </p>
-            </div>
 
-            <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3 w-full">
-              {rules.map((rule, index) => (
-                <div
-                  key={index}
-                  className="bg-slate-50 w-[90%] h-[28rem] flex justify-center items-center flex-col border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden"
-                >
-                  <img
-                    src={rule.image}
-                    alt={rule.title}
-                    className="h-56 object-cover"
-                  />
-                  <div className="p-6">
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                      {rule.title}
-                    </h3>
-                    <p className="text-gray-700 mb-3">{rule.description}</p>
-                    <p className="text-sm text-gray-500 italic">
-                      Research: {rule.research}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials */}
-        <section className="py-20 bg-indigo-50">
-          <div className="container mx-auto px-6 max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">What Our Users Say</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Students who have transformed their exam preparation with our system
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 rounded-xl shadow-sm">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xl">A</div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold">Aisha K.</h4>
-                    <p className="text-sm text-gray-500">Engineering Student</p>
-                  </div>
-                </div>
-                <p className="text-gray-700">"I went from barely passing to scoring in the top 10% of my class. The scheduling approach completely changed how I study!"</p>
-              </div>
-              
-              <div className="bg-white p-6 rounded-xl shadow-sm">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xl">R</div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold">Rahul T.</h4>
-                    <p className="text-sm text-gray-500">Medical Student</p>
-                  </div>
-                </div>
-                <p className="text-gray-700">"The flexible schedule worked around my clinical rotations. I no longer had to choose between sleep and studying."</p>
-              </div>
-              
-              <div className="bg-white p-6 rounded-xl shadow-sm">
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-xl">S</div>
-                  <div className="ml-4">
-                    <h4 className="font-semibold">Sara L.</h4>
-                    <p className="text-sm text-gray-500">Law Student</p>
-                  </div>
-                </div>
-                <p className="text-gray-700">"The 80/20 rule helped me focus on what truly mattered. I felt so much more confident walking into my bar exam."</p>
-              </div>
-            </div>
-          </div>
-        </section>
+       
 
         {/* CTA */}
         <section className="py-20 bg-indigo-900 text-white">
