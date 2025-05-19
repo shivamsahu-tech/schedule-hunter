@@ -99,7 +99,7 @@ export default function InputForm() {
 
     console.log("userInput: ", JSON.stringify(userData));
 
-    const result = await fetch('http://localhost:3001/generate-schedule', {
+    const result = await fetch('https://schedule-hunter.onrender.com/generate-schedule', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

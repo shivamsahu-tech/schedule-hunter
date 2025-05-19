@@ -7,6 +7,8 @@ import Table from './view/Table';
 import Cards from './view/Cards';
 import Calender from './view/Calender';
 import { useLocation } from 'react-router-dom';
+import { exportScheduleAsPdf } from '../services/exportPdf';
+
 
 
 
@@ -18,6 +20,8 @@ export default function ScheduleView() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const location = useLocation();
   const { state } = location;
+
+
   
   console.log("ScheduleView state:", state);
 
@@ -32,10 +36,15 @@ export default function ScheduleView() {
 
   return (
     <div className="max-w-6xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-6 flex items-center">
-        <GraduationCap className="mr-2" size={24} />
-        My Study Schedule
-      </h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-2xl font-bold flex items-center">
+          <GraduationCap className="mr-2" size={24} />
+          My Study Schedule
+        </h1>
+        <button 
+        onClick={() => exportScheduleAsPdf(scheduleData)}
+        className='text-md font-semibold rounded-md text-white bg-black py-2 px-3 hover:bg-[#444444] cursor-pointer' >Export As PDF</button>
+      </div>
       
       <div className="flex mb-6 gap-4">
         <button 

@@ -6,6 +6,8 @@ import InputPage from '../pages/InputPage';
 import Dashboard from '../pages/Dashboard';
 import Schedule from '../pages/Schedule';
 import LandingPage from '../pages/LandingPage';
+import NoCalender from '../pages/NoCalender';
+import Docs from '../pages/Docs';
 
 export const router = createBrowserRouter([
   {
@@ -33,5 +35,13 @@ export const router = createBrowserRouter([
   {
     path: '/schedule',
     element: <Schedule />
+  },
+  {
+    path: '/no-calender',
+    element: <NoCalender />
+  },
+  {
+    path: '/docs',
+    element: <Docs />
   },
 ]); 

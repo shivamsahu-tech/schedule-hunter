@@ -38,14 +38,14 @@ def generateSchedule(priorityList, examDates, dailyStudyHours, subjectwiseStreng
             },
         }
     }
-    Notes: Allocate daily study hours as per user demand (total allocate hours daily as user says their daily study hours).
-    ***. Schedule topics between the exam dates, so that student can revise the topics before the exam.   
-    1. Strictly follow the exam dates and allocate topics accordingly.
-    2. Prioritize the topics based on the priority list provided, maybe you can avoid some low-priority topics if time is short.
-    3. Ensure that the schedule is balanced and covers all subjects.
-    4. You can allocate any number of subjects in a day, but also make sure to not overload the student.
-    5. Don't miss any date before exam and at the exam date revise on that subject.
-    6. if there is much time left for exam and the student is strong in that subject, then you can allocate time for further subjects.
+        Notes: Allocate daily study hours as per user demand (total allocate hours daily as user says their daily study hours).
+        ***. Schedule topics between the exam dates, so that student can revise the topics before the exam.   
+        1. Strictly follow the exam dates and allocate topics accordingly.
+        2. Prioritize the topics based on the priority list provided, maybe you can avoid some low-priority topics if time is short.
+        3. Ensure that the schedule is balanced and covers all subjects.
+        4. You can allocate any number of subjects in a day, but also make sure to not overload the student.
+        5. Don't miss any date before exam and at the exam date revise on that subject.
+        6. if there is much time left for exam and the student is strong in that subject, then you can allocate time for further subjects.
 
     Best Researches: 
     Allocate more time to topics that are both important (exam weight) and difficult (user weakness).
